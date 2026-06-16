@@ -1,0 +1,40 @@
+# Nom du workflow affiché dans GitHub
+name: CI — Tests automatiques
+
+# Déclencheur : à chaque push sur n'importe quelle branche
+on: [push]
+
+jobs:
+  test:
+    # Machine virtuelle Linux dans le cloud GitHub
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 — Récupérer le code du repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Étape 2 — Installer Python 3.12
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      # Étape 3 — Installer les dépendances
+      - name: Install dependencies
+        run: pip install pandas scikit-learn pytest
+
+      # Étape 4 — Télécharger le dataset
+      - name: Download dataset
+        run: |
+          python -c "
+          import urllib.request
+          urllib.request.urlretrieve(
+              'https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data',
+              'data/heart.csv'
+          )
+          "
+
+      # Étape 5 — Lancer les tests
+      - name: Run tests
+        run: pytest tests/test_preprocessing.py -v
