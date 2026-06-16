@@ -30,7 +30,14 @@ def preprocess(filepath):
     df = prepare_target(df)
     return df
 
+'''if __name__ == "__main__":
+    data = preprocess('data/heart.csv')
+    print(f"Dataset prêt : {data.shape}")
+    print(data.head())
+    '''
 if __name__ == "__main__":
     data = preprocess('data/heart.csv')
+    # Sauvegarder le dataset nettoyé pour le pipeline DVC
+    data.to_csv('data/heart_clean.csv', index=False)
     print(f"Dataset prêt : {data.shape}")
     print(data.head())

@@ -1,0 +1,21 @@
+stages:
+  preprocess:
+    cmd: python src/preprocessing.py
+    deps:
+      - data/heart.csv
+      - src/preprocessing.py
+    outs:
+      - data/heart_clean.csv
+
+  train:
+    cmd: python src/train.py
+    deps:
+      - data/heart_clean.csv
+      - src/train.py
+    params:
+      - params.yaml:
+          - train.random_forest.n_estimators
+          - train.random_forest.max_depth
+          - train.xgboost.n_estimators
+          - train.xgboost.max_depth
+          - train.xgboost.learning_rate
