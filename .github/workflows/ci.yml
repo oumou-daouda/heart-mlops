@@ -27,12 +27,12 @@ jobs:
       # Étape 4 — Télécharger le dataset
       - name: Download dataset
         run: |
+          pip install requests
           python -c "
-          import urllib.request
-          urllib.request.urlretrieve(
-              'https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data',
-              'data/heart.csv'
-          )
+          import requests
+          url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data'
+          r = requests.get(url)
+          open('data/heart.csv', 'wb').write(r.content)
           "
 
       # Étape 5 — Lancer les tests
