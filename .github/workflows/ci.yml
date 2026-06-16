@@ -24,9 +24,10 @@ jobs:
       - name: Install dependencies
         run: pip install pandas scikit-learn pytest
 
-      # Étape 4 — Télécharger le dataset
+      # Étape 4 — Créer le dossier data et télécharger le dataset
       - name: Download dataset
         run: |
+          mkdir -p data
           pip install requests
           python -c "
           import requests
