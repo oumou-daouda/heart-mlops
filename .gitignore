@@ -2,7 +2,7 @@
 .venv/
 
 # Données brutes (gérées par DVC au Jour 8)
-data/
+data/*.csv
 
 # Fichiers Python temporaires
 __pycache__/
