@@ -52,4 +52,4 @@ if __name__ == "__main__":
     my_eval = report.run(reference, current)
     my_eval.save_html("monitoring/drift_report.html")
 
-    print("✅ Rapport généré : monitoring/drift_report.html")
+    print("Rapport genere : monitoring/drift_report.html")

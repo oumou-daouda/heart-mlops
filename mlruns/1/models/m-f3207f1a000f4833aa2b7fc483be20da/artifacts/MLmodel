@@ -1,0 +1,23 @@
+artifact_path: file:///C:/Python_Projects/heart-mlops/mlruns/1/models/m-f3207f1a000f4833aa2b7fc483be20da/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.3
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.9.0
+    skops_trusted_types: null
+mlflow_version: 3.13.0
+model_id: m-f3207f1a000f4833aa2b7fc483be20da
+model_size_bytes: 114296
+model_uuid: m-f3207f1a000f4833aa2b7fc483be20da
+prompts: null
+run_id: 0f7860ef11814e6e80d8bbf72cce020f
+utc_time_created: '2026-06-17 11:17:15.211855'

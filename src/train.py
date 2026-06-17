@@ -47,7 +47,7 @@ def train_model(model, model_name, params, X_train, X_test, y_train, y_test):
         # Sauvegarder le modèle comme artifact
         mlflow.sklearn.log_model(model, "model")
 
-        print(f"{model_name} → AUC: {metrics['auc']:.3f} | F1: {metrics['f1']:.3f} | Accuracy: {metrics['accuracy']:.3f}")
+        print(f"{model_name} -> AUC: {metrics['auc']:.3f} | F1: {metrics['f1']:.3f} | Accuracy: {metrics['accuracy']:.3f}")
 
 if __name__ == "__main__":
     import yaml

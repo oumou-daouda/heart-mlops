@@ -1,0 +1,36 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocessing.py
+    deps:
+    - path: data/heart.csv
+      hash: md5
+      md5: 2d91a8ff69cfd9616aa47b59d6f843db
+      size: 18461
+    - path: src/preprocessing.py
+      hash: md5
+      md5: a0469d386a77466af70b5d593eb4473c
+      size: 1319
+    outs:
+    - path: data/heart_clean.csv
+      hash: md5
+      md5: 652fffe2e5e4ac068195fef1c6a2760d
+      size: 18485
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/heart_clean.csv
+      hash: md5
+      md5: 652fffe2e5e4ac068195fef1c6a2760d
+      size: 18485
+    - path: src/train.py
+      hash: md5
+      md5: bbcd652de72c21209175ae4dc850f336
+      size: 3504
+    params:
+      params.yaml:
+        train.random_forest.max_depth: 5
+        train.random_forest.n_estimators: 100
+        train.xgboost.learning_rate: 0.1
+        train.xgboost.max_depth: 3
+        train.xgboost.n_estimators: 100
