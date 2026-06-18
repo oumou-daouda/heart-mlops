@@ -1,8 +1,7 @@
 import sys
 sys.path.append('.')
 
-import mlflow
-import mlflow.sklearn
+import joblib
 import numpy as np
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -30,9 +29,8 @@ class PatientData(BaseModel):
     ca: float
     thal: float
 
-# --- Chargement du modèle au démarrage de l'API ---
-mlflow.set_tracking_uri("http://localhost:5000")
-model = mlflow.sklearn.load_model("models:/HeartModel/1")
+# --- Chargement du modèle exporté (fichier autonome, pas besoin de MLflow) ---
+model = joblib.load("models/heart_model.pkl")
 
 # --- Endpoint GET — vérifier que l'API tourne ---
 @app.get("/health")
@@ -43,15 +41,13 @@ def health():
 @app.post("/predict")
 def predict(data: PatientData):
 
-    # Convertir les données en tableau numpy
     features = np.array([[
         data.age, data.sex, data.cp, data.trestbps, data.chol,
         data.fbs, data.restecg, data.thalach, data.exang,
-        np.log1p(data.oldpeak),  # transformation log1p comme à l'entraînement
+        np.log1p(data.oldpeak),
         data.slope, data.ca, data.thal
     ]])
 
-    # Prédiction et probabilité
     prediction = model.predict(features)[0]
     probability = model.predict_proba(features)[0][1]
 
